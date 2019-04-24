@@ -4,7 +4,11 @@
     <a href="/posts" class="btn btn-primary">Go Back</a>
     <br><br>
     <h1>{{ $post->title }}</h1>
-    <p>{!! $post->body !!}</p>
+    <img style="width:100%;" src="/storage/cover_images/{{ $post->cover_image }}" alt="">
+    <br><br>
+    <div>
+        {!! $post->body !!}
+    </div>
     <hr>
     <small>Written on {{ $post->created_at }}</small>
     <hr>   

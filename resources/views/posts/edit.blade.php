@@ -18,4 +18,9 @@
         {{ Form::hidden('_method', 'PUT') }}
         {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
     {!! Form::close() !!}
+
+    <br><br>
+    <div class="col-md-4 col-sm-4">
+        <img style="width:100px; height:100px;" src="/storage/cover_images/{{ $post->cover_image }}" alt="">
+    </div>
 @endsection 

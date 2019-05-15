@@ -25,7 +25,7 @@ class PostsController extends Controller
     //  $posts = Post::orderBy('created_at', 'desc')->get();
     //  $posts = Post::orderBy('created_at', 'desc')->take(1)->get();
 
-        $posts = Post::orderBy('created_at', 'desc')->paginate(2);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(3);
 
         return view('posts.index')->with('posts', $posts);
     }
@@ -149,8 +149,19 @@ class PostsController extends Controller
 
         // Updating a post
         $post = Post::find($id);
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
+        $post->title = $request->title;
+        $post->body = $request->body;
+
+        // if(!isset($request->is_active)) {
+        //     $post->is_active = 0;
+        // } else {
+        //     $post->is_active = 1;
+        // }
+
+        $post->is_active = (!isset($request->is_active) ? 0 : 1);
+
+        
+        
 
         if($request->hasFile('cover_image')) {
             $post->cover_image = $fileNameToStore;
@@ -184,4 +195,23 @@ class PostsController extends Controller
 
         return redirect('/posts')->with('success', 'Post Removed');
     }
+
+    public function activation(Request $request, $id)
+    {
+        $post = Post::find($id);
+        echo "inside controller";
+
+        if($post->is_active == 1){
+            $post->is_active = 0;
+        } else {
+            $post->is_active = 1;
+        }
+
+        return response()->json([
+        'data' => [
+            'success' => $post->save(),
+        ]
+        ]);
+    }
 }
+

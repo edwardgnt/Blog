@@ -160,8 +160,6 @@ class PostsController extends Controller
 
         $post->is_active = (!isset($request->is_active) ? 0 : 1);
 
-        
-        
 
         if($request->hasFile('cover_image')) {
             $post->cover_image = $fileNameToStore;

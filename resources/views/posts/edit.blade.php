@@ -30,23 +30,3 @@
 @endsection 
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-<script>
-$(document).ready(function(){
-    var post_id = "<?php echo $post->id ?>";
-    var post_url = '/posts' + '/' + post_id + '/activation';
-$("input:checkbox").change(function() { 
-    var isChecked = $("input:checkbox").is(":checked") ? 1:0; 
-    $.ajax({
-        type:'POST',
-        url: post_url,
-        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-        data: $('.checkbox').serialize(),
-            success:function(data){
-            }
-    });
-});
-});
-</script>
